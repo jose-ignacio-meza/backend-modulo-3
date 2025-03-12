@@ -2,17 +2,17 @@ Primera entrega para el curso Bakcend modulo 3 de CoderHouse.
 
 En el proyecto se encuentran las siguientes rutas:
 
-1-"api/mocks" La cual devuelve un objeto con dos arreglos, uno de usuarios y otro de mascotas, creadas a partir del modelo correspondiente a cada objeto, por defecto 
+1-"api/mocks" Con el metodo GET, La cual devuelve un objeto con dos arreglos, uno de usuarios y otro de mascotas, creadas a partir del modelo correspondiente a cada objeto, por defecto 
 realiza 10 objetos de cada uno, tambien se puede enviar en el body la variable "cantidad" para indicar un numero entero la cantidad de objetos que se solicita crear.
 
-2-"/api/mocks/mockingpets" la cual resuelve un arreglo con la cantidad por defecto de 10 mascotas, si se envia el parametro "cantidad" en el body de la peticion, 
+2-"/api/mocks/mockingpets" Con el metodo GET, la cual resuelve un arreglo con la cantidad por defecto de 10 mascotas, si se envia el parametro "cantidad" en el body de la peticion, 
 se resuelve con la esa cantidad de mascotas solicitadas.
 
-3-"api/mocks/mockingusers" la que resuelve un arreglo de 50 usuarios, los cuales son creados segun el modelo de users y peuden ser cargados a las db. 
+3-"api/mocks/mockingusers" Con el metodo GET, la que resuelve un arreglo de 50 usuarios, los cuales son creados segun el modelo de users y peuden ser cargados a las db. 
 
-4-"mocks/generateData" La cual genera un archivo json con la cantidad de usuarios y mascotas solicitadas, es necesario indicar la cantidad de cada uno con las variables
+4-"mocks/generateData" Con el metodo POST, la cual genera un archivo json con la cantidad de usuarios y mascotas solicitadas, es necesario indicar la cantidad de cada uno con las variables
 "users" y "pets" en el body de la peticion.
 
-5-"/api/users" Devuelve los usuarios cargados en la db correspondiente a la url "mongodb://localhost:27017/pets".
+5-"/api/users" Con el metodo GET, Devuelve los usuarios cargados en la db correspondiente a la url "mongodb://localhost:27017/pets".
 
-6-"/api/pets" Devuelve las mascotas cargadas en la db correspondiente a la url "mongodb://localhost:27017/pets".
+6-"/api/pets" Con el metodo GET, Devuelve las mascotas cargadas en la db correspondiente a la url "mongodb://localhost:27017/pets".
