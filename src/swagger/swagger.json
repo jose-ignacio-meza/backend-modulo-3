@@ -1,0 +1,454 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "AdoptMe API",
+      "version": "1.0.0",
+      "description": "API para gestionar usuarios, mascotas y adopciones en AdoptMe."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080",
+        "description": "Servidor local"
+      }
+    ],
+    "paths": {
+        "/api/users": {
+        "get": {
+            "tags": ["Users"],
+            "summary": "Obtener todos los usuarios",
+            "description": "Devuelve una lista de todos los usuarios registrados.",
+            "responses": {
+            "200": {
+                "description": "Lista de usuarios",
+                "content": {
+                "application/json": {
+                    "schema": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                    }
+                }
+                }
+            },
+            "500": {
+                "description": "Error interno del servidor"
+            }
+            }
+        },
+        "post": {
+            "tags": ["Users"],
+            "summary": "Crear un nuevo usuario",
+            "description": "Crea un nuevo usuario en la base de datos.",
+            "requestBody": {
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/User"
+                }
+                }
+            }
+            },
+            "responses": {
+            "201": {
+                "description": "Usuario creado exitosamente",
+                "content": {
+                "application/json": {
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+                }
+                }
+            },
+            "400": {
+                "description": "Error en la solicitud"
+            }
+            }
+        }
+        },
+        "/api/users/{uid}": {
+        "put":{
+            "tags": ["Users"],
+            "summary": "Actualizar un usuario por ID",
+            "description": "Actualiza los detalles de un usuario específico utilizando su ID.",
+            "parameters": [
+            {
+                "name": "uid",
+                "in": "path",
+                "required": true,
+                "description": "ID del usuario a actualizar",
+                "schema": {
+                "type": "string",
+                "example": "64f7c8e2d5b3c2a1b8e9f123"
+                }
+            }
+            ],
+            "requestBody": {
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/User"
+                }
+                }
+            }
+            },
+            "responses": {
+            "200": {
+                "description": "Usuario actualizado exitosamente",
+                "content": {
+                "application/json": {
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+            },
+            "404": {
+                "description": "Usuario no encontrado",
+                "content": {
+                "application/json": {
+                    "message": {
+                        "type": "string",
+                        "example": "Error al encontrar al usuario."
+                    }
+                  }
+                }
+            },
+            "500": {
+                "description": "Error interno del servidor"
+            }
+            }
+        },
+        "delete": {
+            "tags": ["Users"],
+            "summary": "Eliminar un usuario por ID",
+            "description": "Elimina un usuario específico de la base de datos utilizando su ID.",
+            "parameters": [
+            {
+                "name": "uid",
+                "in": "path",
+                "required": true,
+                "description": "ID del usuario a eliminar",
+                "schema": {
+                "type": "string",
+                "example": "64f7c8e2d5b3c2a1b8e9f123"
+                }
+            }
+            ],
+            "responses": {
+            "200": {
+                "description": "Usuario eliminado exitosamente",
+                "content": {
+                "application/json": {
+                    "schema": {
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                        "type": "string",
+                        "example": "Usuario eliminado exitosamente."
+                        }
+                    }
+                    }
+                }
+                }
+            },
+            "404": {
+                "description": "Usuario no encontrado",
+                "content": {
+                "application/json": {
+                    "schema": {
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                        "type": "string",
+                        "example": "Error al encontrar al usuario."
+                        }
+                    }
+                    }
+                }
+                }
+            },
+            "500": {
+                "description": "Error interno del servidor",
+                "content": {
+                "application/json": {
+                    "schema": {
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                        "type": "string",
+                        "example": "Error al conectarse al servicio de base de datos."
+                        }
+                    }
+                    }
+                }
+                }
+            }
+            }
+        }
+        
+        },
+        "/api/pets": {
+        "get": {
+            "tags": ["Pets"],
+            "summary": "Obtener todas las mascotas",
+            "description": "Devuelve una lista de todas las mascotas registradas.",
+            "responses": {
+            "200": {
+                "description": "Lista de mascotas",
+                "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "type": "string",
+                                "example": "success"
+                            },
+                            "payload": {
+                                "$ref": "#/components/schemas/Pet"
+                            }
+                        }
+                    }
+                }
+                }
+            },
+            "500": {
+                "description": "Error interno del servidor"
+            }
+            }
+        },
+        "post": {
+            "tags": ["Pets"],
+            "summary": "Crear una nueva mascota",
+            "description": "Crea una nueva mascota en la base de datos.",
+            "requestBody": {
+            "required": true,
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Pet"
+                }
+                }
+            }
+            },
+            "responses": {
+            "201": {
+                "description": "Mascota creada exitosamente",
+                "content": {
+                "application/json": {
+                    "schema":{
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "type": "string",
+                                "example": "success"
+                            },
+                            "payload": {
+                                "$ref": "#/components/schemas/Pet"
+                            }
+                        }
+                    }
+                }
+                }
+            },
+            "400": {
+                "description": "Error en la solicitud"
+            }
+            }
+        }
+        },
+        "/api/pets/{uid}": {
+            "put": {
+                "tags": ["Pets"],
+                "summary": "Actualizar una mascota por ID",
+                "description": "Actualiza los detalles de una mascota específica utilizando su ID.",
+                "parameters": [
+                {
+                    "name": "uid",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID de la mascota a actualizar",
+                    "schema": {
+                    "type": "string",
+                    "example": "64f7c8e2d5b3c2a1b8e9f123"
+                    }
+                }
+                ],
+                "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/Pet"
+                    }
+                    }
+                }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mascota actualizada exitosamente",
+                        "content": {
+                        "application/json": {
+                            "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                "type": "string",
+                                "example": "success"
+                                },
+                                "message": {
+                                "type": "string",
+                                "example": "Mascota actualizada exitosamente."
+                                },
+                                "payload": {
+                                "$ref": "#/components/schemas/Pet"
+                                }
+                            }
+                            }
+                        }
+                        }
+                    },
+                    "404": {
+                        "description": "Mascota no encontrada",
+                        "content": {
+                        "application/json": {
+                            "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                "type": "string",
+                                "example": "Error al encontrar a la mascota."
+                                }
+                            }
+                            }
+                        }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                }
+            },
+            "delete":{
+                "tags": ["Pets"],
+                "summary": "Eliminar una mascota por ID",
+                "description": "Elimina una mascota específica de la base de datos utilizando su ID.",
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID de la mascota a eliminar",
+                        "schema": {
+                        "type": "string",
+                        "example": "64f7c8e2d5b3c2a1b8e9f123"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mascota eliminada exitosamente",
+                        "content": {
+                        "application/json": {
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": "success"
+                                    },
+                                    "message":{
+                                        "type": "string",
+                                        "example": "Mascota eliminada exitosamente."
+                                    },
+                                    "payload": {
+                                        "$ref": "#/components/schemas/Pet"
+                                    }
+                                }
+                            }
+                          }
+                        }
+                    },
+                    "404": {
+                        "description": "Mascota no encontrada",
+                        "content": {
+                        "application/json": {
+                            "schema":{
+                                "message":{
+                                    "type": "string",
+                                    "example": "Error al encontrar a la mascota."
+                                }
+                            }
+                          }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+
+                }
+            }
+        }
+    },
+    "components": {
+    "schemas": {
+        "User": {
+        "type": "object",
+        "properties": {
+            "first_name": {
+            "type": "string",
+            "example": "Jose"
+            },
+            "last_name": {
+            "type": "string",
+            "example": "Meza"
+            },
+            "email": {
+            "type": "string",
+            "example": "jose.meza@test.com"
+            },
+            "password": {
+            "type": "string",
+            "example": "coder123"
+            },
+            "role": {
+            "type": "string",
+            "example": "user"
+            },
+            "pets": {
+            "type": "array",
+            "example":[]
+            }
+        }
+        },
+        "Pet": {
+        "type": "object",
+        "properties": {
+            "name": {
+            "type": "string",
+            "example": "Firulais"
+            },
+            "birthDate": {
+            "type": "Number",
+            "example": "6"
+            },
+            "species": {
+            "type": "string",
+            "example": "Perro"
+            },
+            "adopted": {
+            "type": "boolean",
+            "example": false
+            },
+            "owner_id": {
+            "type": "string",
+            "example": "64f7c8e2d5b3c2a1b8e9f123"
+            }
+        }
+        }
+    }
+    }
+}

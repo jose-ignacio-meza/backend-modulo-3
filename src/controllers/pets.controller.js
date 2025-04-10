@@ -8,11 +8,15 @@ const getAllPets = async(req,res)=>{
 }
 
 const createPet = async(req,res)=> {
-    const {name,specie,birthDate} = req.body;
-    if(!name||!specie||!birthDate) return res.status(400).send({status:"error",error:"Incomplete values"})
-    const pet = PetDTO.getPetInputFrom({name,specie,birthDate});
-    const result = await petsService.create(pet);
-    res.send({status:"success",payload:result})
+    const {name,species,birthDate} = req.body;
+    if(!name||!species||!birthDate) return res.status(400).send({status:"error",error:"Incomplete values"})
+    const pet = PetDTO.getPetInputFrom({name,species,birthDate});
+    try{
+        const result = await petsService.create(pet);
+        res.status(201).send({status:"success",payload:result})
+    }catch(err){
+        res.status(500).send({status:"error",error:err.message})
+    }
 }
 
 const updatePet = async(req,res) =>{

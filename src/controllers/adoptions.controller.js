@@ -1,4 +1,5 @@
 import { adoptionsService, petsService, usersService } from "../services/index.js"
+import { isValidObjectId } from "mongoose";
 
 const getAllAdoptions = async(req,res)=>{
     const result = await adoptionsService.getAll();
@@ -14,6 +15,8 @@ const getAdoption = async(req,res)=>{
 
 const createAdoption = async(req,res)=>{
     const {uid,pid} = req.params;
+    if(!uid || !pid) return res.status(400).send({status:"error",error:"Incomplete values"});
+    if(!isValidObjectId(uid) || !isValidObjectId(pid)) return res.status(400).send({status:"error",error:"Invalid id"})
     const user = await usersService.getUserById(uid);
     if(!user) return res.status(404).send({status:"error", error:"user Not found"});
     const pet = await petsService.getBy({_id:pid});
@@ -23,7 +26,7 @@ const createAdoption = async(req,res)=>{
     await usersService.update(user._id,{pets:user.pets})
     await petsService.update(pet._id,{adopted:true,owner:user._id})
     await adoptionsService.create({owner:user._id,pet:pet._id})
-    res.send({status:"success",message:"Pet adopted"})
+    res.status(201).send({status:"success",message:"Pet adopted"})
 }
 
 export default {

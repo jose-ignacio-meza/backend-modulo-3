@@ -50,10 +50,14 @@ const getMocksUsers = async(req,res)=>{
 const getMocksPets = async(req,res)=>{ 
     const cantidad = req.body.cantidad || 10;
     const mocksPet = [];
+    try{
     for (let i = 0; i < cantidad; i++) {
-        mocksPet.push(createMockPet());
+         mocksPet.push(await createMockPet());
     }
     res.send({status:"succes", data:mocksPet});
+    }catch(err){
+        res.send({status:"error", data:err});
+    }
 };
 
 const getMocksUserandPets = async(req,res)=>{   
