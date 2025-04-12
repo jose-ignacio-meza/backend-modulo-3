@@ -7,14 +7,14 @@ WORKDIR /app
 # Copia solo los archivos de dependencias primero
 COPY package*.json ./
 
-# Instala las dependencias DENTRO del contenedor (sin heredar binarios de tu máquina)
+# Instala dependencias dentro del contenedor (con binarios correctos)
 RUN npm install
 
-# Luego copia el resto del proyecto
+# Luego copiá el resto del proyecto
 COPY . .
 
-# Expone el puerto (ajustalo según el que uses)
+# Exponé el puerto usado por tu app
 EXPOSE 8080
 
-# Comando por defecto al iniciar el contenedor
+# Comando por defecto para iniciar la app
 CMD ["npm", "start"]

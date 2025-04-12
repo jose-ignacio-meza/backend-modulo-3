@@ -1,3 +1,4 @@
+--------2.0------------
 Primera entrega para el curso Bakcend modulo 3 de CoderHouse.
 
 En el proyecto se encuentran las siguientes rutas:
@@ -16,3 +17,25 @@ se resuelve con la esa cantidad de mascotas solicitadas.
 5-"/api/users" Con el metodo GET, Devuelve los usuarios cargados en la db correspondiente a la url "mongodb://localhost:27017/pets".
 
 6-"/api/pets" Con el metodo GET, Devuelve las mascotas cargadas en la db correspondiente a la url "mongodb://localhost:27017/pets".
+
+--------2.0------------
+Entrega Final
+
+Documentacion:
+-Se agregaro la libreria swagger para documentar la API, se puede acceder a la documentacion en la ruta "/api-docs".
+-Se agregaron los metodos de POST, PUT y DELETE para las rutas de usuarios y mascotas, permitiendo crear, modificar y eliminar objetos de la base de datos.
+-Se agregaron validaciones para los metodos de POST y PUT, asegurando que los datos enviados cumplan con el formato requerido por los modelos de usuarios y mascotas.
+
+Testing:
+-Se agregaron pruebas para la ruta "api/adopttion" con el metodo GET, la cual devuelve un arreglo de mascotas que han sido adoptadas por usuarios.
+-Se agregaron pruebas para la ruta "api/adopttion" con el metodo POST, la cual permite adoptar una mascota por un usuario, asegurando que los datos enviados cumplan con el formato requerido por los modelos de usuarios y mascotas.
+-Se agregaron pruebas para la ruta "api/adopttion" con el metodo DELETE, la cual permite eliminar una adopcion de mascota por un usuario, asegurando que los datos enviados cumplan con el formato requerido por los modelos de usuarios y mascotas.
+-Se agregaron pruebas para estas mismas rutas mencionadas anteriormente pero en caso de errores, asegurando que los errores sean manejados correctamente y se devuelvan los mensajes de error correspondientes.
+-Las pruebas estan sujetas al usuario con el "_id" = "67f48fe2190730167ad3efb1" y la mascota con el "_id" = "67f49243d31615ab4977529b", ambos cargados en la db de mongoDB.
+-Todas las pruebas se ejecutan con el comando npm test, y se encuentran en la carpeta "tests" del proyecto.
+
+Despliegue:
+-Se realiza un archivo Dockerfile para crear una imagen de docker del proyecto, la cual se puede ejecutar en cualquier sistema operativo que tenga instalado Docker.
+-Se subio la imagen a Dockerhub con el nombre "entregafinal", dejo el enlace aqui: https://hub.docker.com/r/joseignaciomeza/entregafinal/tags .
+-Se puede ejecutar la imagen con el siguiente comando: docker run -p 8080:8080 joseignaciomeza/entregafinal:latest .
+-Se puede acceder a la API en la url "http://localhost:8080" y a la documentacion en la url "http://localhost:8080/api-docs".
