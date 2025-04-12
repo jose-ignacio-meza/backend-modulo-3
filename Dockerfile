@@ -4,13 +4,16 @@ FROM node:18
 # Establece el directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copia los archivos del proyecto al contenedor
-COPY . .
+# Copia solo los archivos de dependencias primero
+COPY package*.json ./
 
-# Instala las dependencias
+# Instala las dependencias DENTRO del contenedor (sin heredar binarios de tu máquina)
 RUN npm install
 
-# Expone el puerto (si tu app lo usa)
+# Luego copia el resto del proyecto
+COPY . .
+
+# Expone el puerto (ajustalo según el que uses)
 EXPOSE 8080
 
 # Comando por defecto al iniciar el contenedor
