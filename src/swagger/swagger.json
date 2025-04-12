@@ -100,7 +100,20 @@
                 "content": {
                 "application/json": {
                     "schema": {
-                    "$ref": "#/components/schemas/User"
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "type": "string",
+                                "example": "success"
+                            },
+                            "message": {
+                                "type": "string",
+                                "example": "User updated."
+                            },
+                            "payload": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
                     }
                   }
                 }
@@ -301,7 +314,7 @@
                                 },
                                 "message": {
                                 "type": "string",
-                                "example": "Mascota actualizada exitosamente."
+                                "example": "Pet updated."
                                 },
                                 "payload": {
                                 "$ref": "#/components/schemas/Pet"
@@ -435,17 +448,9 @@
             "type": "Number",
             "example": "6"
             },
-            "species": {
+            "specie": {
             "type": "string",
             "example": "Perro"
-            },
-            "adopted": {
-            "type": "boolean",
-            "example": false
-            },
-            "owner_id": {
-            "type": "string",
-            "example": "64f7c8e2d5b3c2a1b8e9f123"
             }
         }
         }

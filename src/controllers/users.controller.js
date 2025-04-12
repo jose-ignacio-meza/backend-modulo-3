@@ -50,7 +50,7 @@ const updateUser = async(req,res)=>{
         const user = await usersService.getUserById(userId);
         if(!user) return res.status(404).send({status:"error", error:"User not found"})
         const result = await usersService.update(userId,updateBody);
-        res.send({status:"success",payload:result ,message:"User updated"})
+        res.send({status:"success",message:"User updated",payload:result})
     }catch(err){
         return res.status(500).send({status:"error",error:"Internal Error"})
     }

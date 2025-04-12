@@ -8,9 +8,9 @@ const getAllPets = async(req,res)=>{
 }
 
 const createPet = async(req,res)=> {
-    const {name,species,birthDate} = req.body;
-    if(!name||!species||!birthDate) return res.status(400).send({status:"error",error:"Incomplete values"})
-    const pet = PetDTO.getPetInputFrom({name,species,birthDate});
+    const {name,specie,birthDate} = req.body;
+    if(!name||!specie||!birthDate) return res.status(400).send({status:"error",error:"Incomplete values"})
+    const pet = PetDTO.getPetInputFrom({name,specie,birthDate});
     try{
         const result = await petsService.create(pet);
         res.status(201).send({status:"success",payload:result})
@@ -23,13 +23,13 @@ const updatePet = async(req,res) =>{
     const petUpdateBody = req.body;
     const petId = req.params.pid;
     const result = await petsService.update(petId,petUpdateBody);
-    res.send({status:"success",message:"pet updated"})
+    res.send({status:"success",message:"Pet updated", payload:result});
 }
 
 const deletePet = async(req,res)=> {
     const petId = req.params.pid;
     const result = await petsService.delete(petId);
-    res.send({status:"success",message:"pet deleted"});
+    res.send({status:"success",message:"Pet deleted.",payload:result});
 }
 
 const createPetWithImage = async(req,res) =>{
@@ -47,6 +47,7 @@ const createPetWithImage = async(req,res) =>{
     const result = await petsService.create(pet);
     res.send({status:"success",payload:result})
 }
+
 export default {
     getAllPets,
     createPet,

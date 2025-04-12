@@ -15,8 +15,8 @@ export default class Users {
         return userModel.create(doc);
     }
 
-    update = (id,doc) =>{
-        return userModel.findByIdAndUpdate(id,{$set:doc})
+    update = (id, doc) => {
+        return userModel.findByIdAndUpdate(id, { $set: doc }, { new: true });
     }
 
     delete = (id) =>{
