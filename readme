@@ -35,7 +35,8 @@ Testing:
 -Todas las pruebas se ejecutan con el comando npm test, y se encuentran en la carpeta "tests" del proyecto.
 
 Despliegue:
--Se realiza un archivo Dockerfile para crear una imagen de docker del proyecto, la cual se puede ejecutar en cualquier sistema operativo que tenga instalado Docker.
--Se subio la imagen a Dockerhub con el nombre "entregafinal", dejo el enlace aqui: https://hub.docker.com/r/joseignaciomeza/entregafinal/tags .
--Se puede ejecutar la imagen con el siguiente comando: docker run -p 8080:8080 joseignaciomeza/entregafinal:latest .
--Se puede acceder a la API en la url "http://localhost:8080" y a la documentacion en la url "http://localhost:8080/api-docs".
+-Se realizo un archivo Dockerfile para crear una imagen de docker del proyecto, la cual se puede ejecutar en cualquier sistema operativo que tenga instalado Docker.
+-Se subio la imagen a Dockerhub con el nombre "entregafinal", dejo el enlace aqui: https://hub.docker.com/r/joseignaciomeza/entregafinalmodulo3/tags .
+-Se puede descargar la imagen con el siguiente comando: docker pull joseignaciomeza/entregafinalmodulo3:latest .
+-Tambien se puede ejecutar la imagen directamente en un contenedor local con el siguiente comando: docker run -p 8080:8080 joseignaciomeza/entregafinal:latest .
+-Para comprobar que este correctamente funcionando se puede acceder a la API en la url "http://localhost:8080" y a la documentacion en la url "http://localhost:8080/api-docs".
